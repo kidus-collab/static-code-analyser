@@ -1,0 +1,5 @@
+{
+  "my-project": "C:/Users/Kidus/path/to/my-project",
+  "api": "D:/work/company-api",
+  "frontend": "../relative/path/to/frontend"
+}

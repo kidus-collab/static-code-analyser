@@ -1,0 +1,21 @@
+{
+  "name": "static-code-analyser",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dependency-light static code metrics CLI for project health reviews.",
+  "type": "module",
+  "bin": {
+    "analyse": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "analyse": "node dist/cli.js",
+    "analyse:json": "node dist/cli.js --json"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.3"
+  }
+}
+

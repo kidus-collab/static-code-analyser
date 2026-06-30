@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+
+# Local machine/project-name mappings. Copy projects.example.json to projects.json.
+projects.json
+
+*.log
+*.tmp
+.env
+.env.*
