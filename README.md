@@ -25,46 +25,46 @@ npm run build
 Run by folder path:
 
 ```bash
-npm run analyse -- "C:/Users/Kidus/Downloads/kidustracker"
+npm run analyse -- "/path/to/your/project"
 ```
 
 Run by project name from `projects.json`:
 
 ```bash
-npm run analyse -- kidustracker
+npm run analyse -- my-project
 ```
 
 After linking the package locally, you can use the CLI name directly:
 
 ```bash
 npm link
-analyse kidustracker
-analyse "C:/Users/Kidus/Downloads/kidustracker"
+analyse my-project
+analyse "/path/to/your/project"
 ```
 
 JSON output:
 
 ```bash
-analyse kidustracker --json
+analyse my-project --json
 ```
 
 Show more hotspot files:
 
 ```bash
-analyse Profitable --top 20
+analyse my-project --top 20
 ```
 
 Include tests/workbench folders:
 
 ```bash
-analyse mersconhr --include-tests
+analyse my-project --include-tests
 ```
 
 ## Project Names
 
 The analyser does not hard-code project paths in source code. Project names are resolved in this order:
 
-1. A direct folder path, for example `analyse C:/Users/Kidus/ETCRM`.
+1. A direct folder path, for example `analyse /path/to/your/project`.
 2. `STATIC_ANALYSER_PROJECTS` environment variable.
 3. `projects.json`.
 4. Search roots: current directory, home directory, Desktop, Downloads, and any roots supplied with `--root`.
@@ -75,21 +75,21 @@ Example `projects.json`:
 
 ```json
 {
-  "kidustracker": "C:/Users/Kidus/Downloads/kidustracker",
-  "ETCRM": "C:/Users/Kidus/ETCRM"
+  "my-project": "/path/to/your/project",
+  "api": "/path/to/another-project"
 }
 ```
 
 Environment variable as JSON:
 
 ```bash
-STATIC_ANALYSER_PROJECTS='{"kidustracker":"C:/Users/Kidus/Downloads/kidustracker"}'
+STATIC_ANALYSER_PROJECTS='{"my-project":"/path/to/your/project"}'
 ```
 
 Environment variable as a compact list:
 
 ```bash
-STATIC_ANALYSER_PROJECTS='kidustracker=C:/Users/Kidus/Downloads/kidustracker;ETCRM=C:/Users/Kidus/ETCRM'
+STATIC_ANALYSER_PROJECTS='my-project=/path/to/your/project;api=/path/to/another-project'
 ```
 
 ## What The Metrics Mean
@@ -110,7 +110,7 @@ File-level rough guide:
 | `800 - 1,500` | High-risk file. Split responsibilities. |
 | `> 1,500` | Very high risk. Usually a God file. |
 
-So when you see `6658 SLOC` for one file, that is bad. It means a single file is carrying far too many responsibilities. It will be hard to review, test, debug, and safely change. For example, `apps/web/src/pages/Journal.tsx` in `Profitable` at `6,658 SLOC` should be split into smaller page sections, hooks, services, table components, chart components, and state modules.
+So when you see `6658 SLOC` for one file, that is bad. It means a single file is carrying far too many responsibilities. It will be hard to review, test, debug, and safely change. For example, a file like `apps/web/src/pages/SomePage.tsx` at `6,658 SLOC` should be split into smaller page sections, hooks, services, table components, chart components, and state modules.
 
 ### Cyclomatic Complexity (`CC`)
 
@@ -238,5 +238,5 @@ Use this practical rule:
 5. Move API/data access out of UI pages.
 6. Add tests before refactoring any file with high CC and business-critical behavior.
 
-For the earlier `Profitable` result, `apps/web/src/pages/Journal.tsx` at `6,658 SLOC`, `CC 1381`, and `Cognitive 6889` is not just "large"; it is the first file to refactor.
+For an earlier example result, a file like `apps/web/src/pages/SomePage.tsx` at `6,658 SLOC`, `CC 1381`, and `Cognitive 6889` is not just "large"; it is the first file to refactor.
 
